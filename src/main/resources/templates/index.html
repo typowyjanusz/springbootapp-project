@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pl">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, content-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link rel="stylesheet" href="css/animate.css" th:src="@{../css/animate.css}" media="screen" />
+    <link rel="stylesheet" href="css/app.css" th:src="@{../css/app.css}" media="screen" />
+
+
+    <title>index</title>
+</head>
+<body>
+
+<div id="header">
+    <a href="/" class="logo"><img src="images/logo.gif" alt="LOGO" /></a>
+    <div class="container" >
+        <!-- Static navbar -->
+        <div class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" style="height: 1px;">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="/user_create">Create Post</a></li>
+                        <li><a href="">Create User</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Sample 1</a></li>
+                                <li><a href="#">Sample 2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+        </div>
+    </div> <!-- /container -->
+</div>
+
+<div id="content">
+    <div class="container section-wrapper">
+        <div class="section-content">
+            <!-- EXPERIENCE START -->
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <h3 class="text-center text-yellow">
+                        AKTUALNOŚCI
+                    </h3>
+                    <div class="panel-group timeline" id="experience" th:each="content : ${contents}">
+                        <div class="timeline-item">
+                            <div class="timeline-year">
+                                <span class="timeline-year" th:text="${#dates.format(content.getCreated(),'dd-MM-yyyy HH:mm')}"  >data</span>
+                            </div>
+                            <!-- //.timeline-year -->
+                            <!-- //.timeline-btn -->
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <h4 th:text="${content.getTitle()}">Endeca Developer - Comp Name - Location</h4>
+                                    </div>
+                                    <!-- //.panel-title -->
+                                </div>
+                                <!-- //.panel-heading -->
+                                <div id="exp1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <p th:text="${content.getContents()}">
+                                            Responsibilities:
+                                            Your roles and responsibilities goes here  </p>
+                                    </div>
+                                    <!-- //.panel-body -->
+                                </div>
+                                <!-- //.panel-collapse -->
+                            </div>
+                            <!-- //.panel -->
+                        </div>
+                        <!-- //.timeline-item -->
+                    </div>
+                    <!-- //.panel-group -->
+                </div>
+                <!-- //.col-md-10 -->
+            </div>
+            <!-- //EXPERIENCE END -->
+        </div>
+        <!-- //.section-content -->
+    </div>
+</div>
+
+<div id="footer">
+
+    <p th:text="'&copy; Copyright &copy; 2016 Maciej Szarek &amp; Tomasz Żołądź. All rights reserved.'">Copyright  2016 Maciej Szarek  Tomasz Żołądź All rights reserved</p>
+
+
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js" th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script src="js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+<script src="js/app.js" type="text/javascript" th:src="@{../js/app.js}"></script>
+
+</body>
+</html>

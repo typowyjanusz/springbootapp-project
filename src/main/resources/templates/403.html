@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pl">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, content-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>afsda</title>
+</head>
+<body>
+<h1>You do not have permission to access this page!
+</h1>
+<form action="/logout" method="post">
+    <input type="submit" value="Sign in as different content" />
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" th:text="${#httpServletRequest.remoteUser}"/>
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
