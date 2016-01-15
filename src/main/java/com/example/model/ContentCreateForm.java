@@ -9,9 +9,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by Janusz on 2016-01-08.
  */
-public class UserCreateForm {
-
-
+public class ContentCreateForm {
 
     private Integer id;
 
@@ -22,8 +20,6 @@ public class UserCreateForm {
     @NotEmpty
     @Size(max = 1000)
     private String title;
-
-
 
     public Integer getId() {
         return id;
@@ -40,17 +36,14 @@ public class UserCreateForm {
     public String getTitle(){
         return title;
     }
+
     public void setTitle(String title){
         this.title = title;
     }
 
-
-
     public void setContents1(String contents1) {
         this.contents1 = contents1;
     }
-
-
 
     @Override
     public String toString() {
@@ -60,5 +53,4 @@ public class UserCreateForm {
                 .add("title",title)
                 .toString();
     }
-
 }

@@ -1,18 +1,16 @@
 package com.example.service;
 
-import com.example.model.Content;
-import org.springframework.data.jpa.repository.Query;
+import com.example.model.User;
 
 import java.util.List;
 
 /**
- * Created by Janusz on 2016-01-08.
+ * Created by Bany on 2016-01-12.
  */
 public interface UserService {
 
-    Content save(Content content);
+    User save(User user);
 
+    List<User> getList();
 
-    List<Content> getList();
-    //List<Content> findAllByOrderByIdDesc();
 }

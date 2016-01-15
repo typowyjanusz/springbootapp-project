@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head lang="pl">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, content-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,8 +18,8 @@
 
     <title>index</title>
 </head>
-
 <body>
+
 <div id="header">
     <a href="/" class="logo"><img src="images/logo.gif" alt="LOGO" /></a>
     <div class="container" >
@@ -60,45 +60,56 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <h3 class="text-center text-yellow">
-                        LOGOWANIE
+                        AKTUALNOŚCI, Cześć
                     </h3>
-                    <div class="panel-group timeline" id="experience">
+                    <span th:text="${#httpServletRequest.remoteUser}"></span>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="logout" />
+                    </form>
+                    <div class="panel-group timeline" id="experience" th:each="content : ${contents}">
                         <div class="timeline-item">
+                            <div class="timeline-year">
+                                <span class="timeline-year" th:text="${#dates.format(content.getCreated(),'dd-MM-yyyy HH:mm')}"  >data</span>
+                            </div>
                             <!-- //.timeline-year -->
                             <!-- //.timeline-btn -->
                             <div class="panel">
                                 <div class="panel-heading">
                                     <div class="panel-title">
+                                        <h4 th:text="${content.getTitle()}">Endeca Developer - Comp Name - Location</h4>
                                     </div>
                                     <!-- //.panel-title -->
                                 </div>
                                 <!-- //.panel-heading -->
                                 <div id="exp1" class="panel-collapse collapse in">
                                     <div class="panel-body">
-
-                                        <p th:if="${loginError}">Wrong user or password</p>
-                                        <form name="f" th:action="@{/login}" method="post">
-                                            <fieldset>
-                                                <legend>Please Login</legend>
-                                                <div th:if="${param.error}" class="alert alert-error">
-                                                    Invalid username and password.
-                                                </div>
-                                                <div th:if="${param.logout}" class="alert alert-success">
-                                                    You have been logged out.
-                                                </div>
-                                                <label for="username">Username</label>
-                                                <input type="text" id="username" name="username"/>
-                                                <label for="password">Password</label>
-                                                <input type="password" id="password" name="password"/>
-                                                <div class="form-actions">
-                                                    <button type="submit" class="btn">Log in</button>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div></div></div></div></div></div></div></div></div>
+                                        <p th:text="${content.getContents()}">
+                                            Responsibilities:
+                                            Your roles and responsibilities goes here  </p>
+                                    </div>
+                                    <!-- //.panel-body -->
+                                </div>
+                                <!-- //.panel-collapse -->
+                            </div>
+                            <!-- //.panel -->
+                        </div>
+                        <!-- //.timeline-item -->
+                    </div>
+                    <!-- //.panel-group -->
+                </div>
+                <!-- //.col-md-10 -->
+            </div>
+            <!-- //EXPERIENCE END -->
+        </div>
+        <!-- //.section-content -->
+    </div>
 </div>
+
 <div id="footer">
-    <p th:text="'&copy; Copyright &copy; 2016 Maciej Szarek &amp; Tomasz Żołądź. All rights reserved.'"> Copyright  2016 Maciej Szarek  Tomasz Żołądź All rights reserved</p>
+
+    <p th:text="'&copy; Copyright &copy; 2016 Maciej Szarek &amp; Tomasz Żołądź. All rights reserved.'">Copyright  2016 Maciej Szarek  Tomasz Żołądź All rights reserved</p>
+
+
 </div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -110,5 +121,3 @@
 
 </body>
 </html>
-
-

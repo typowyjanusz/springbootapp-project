@@ -60,15 +60,20 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <h3 class="text-center text-yellow">
-                        LOGOWANIE
+                        NOWY POST
                     </h3>
                     <div class="panel-group timeline" id="experience">
                         <div class="timeline-item">
+                            <div class="timeline-year">
+                                <p class="timeline-year" >witaj</p>
+                                <span th:text="${#httpServletRequest.remoteUser}"></span>
+                            </div>
                             <!-- //.timeline-year -->
                             <!-- //.timeline-btn -->
                             <div class="panel">
                                 <div class="panel-heading">
                                     <div class="panel-title">
+                                        <h4>Zredaguj swój post.</h4>
                                     </div>
                                     <!-- //.panel-title -->
                                 </div>
@@ -76,27 +81,27 @@
                                 <div id="exp1" class="panel-collapse collapse in">
                                     <div class="panel-body">
 
-                                        <p th:if="${loginError}">Wrong user or password</p>
-                                        <form name="f" th:action="@{/login}" method="post">
-                                            <fieldset>
-                                                <legend>Please Login</legend>
-                                                <div th:if="${param.error}" class="alert alert-error">
-                                                    Invalid username and password.
-                                                </div>
-                                                <div th:if="${param.logout}" class="alert alert-success">
-                                                    You have been logged out.
-                                                </div>
-                                                <label for="username">Username</label>
-                                                <input type="text" id="username" name="username"/>
-                                                <label for="password">Password</label>
-                                                <input type="password" id="password" name="password"/>
-                                                <div class="form-actions">
-                                                    <button type="submit" class="btn">Log in</button>
-                                                </div>
-                                            </fieldset>
+                                        <form method="POST" th:modelAttribute="form" th:attr="action=@{../user_create}" th:accept-charset="UTF-8" >
+                                            <div>
+
+                                                <input th:autofocus="true" th:path="title" th:id="title" th:name="title" th:value="Tytuł" th:accept-charset="UTF-8" onblur="javascript:if(this.value=='')
+        {this.value=this.defaultValue;}" onfocus="javascript:if(this.value==this.defaultValue){this.value='';}" /> <br />
+
+                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                                            </div>
+                                            <div>
+                                                <input th:size="40px" th:path="contents1" th:id="contents1" th:name="contents1" th:value="Treść" th:accept-charset="UTF-8" onblur="javascript:if(this.value=='')
+        {this.value=this.defaultValue;}" onfocus="javascript:if(this.value==this.defaultValue){this.value='';}" /> <br />
+                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                            </div>
+                                            <div>
+                                                <input type="submit" />
+                                            </div>
                                         </form>
                                     </div></div></div></div></div></div></div></div></div>
 </div>
+
 <div id="footer">
     <p th:text="'&copy; Copyright &copy; 2016 Maciej Szarek &amp; Tomasz Żołądź. All rights reserved.'"> Copyright  2016 Maciej Szarek  Tomasz Żołądź All rights reserved</p>
 </div>
@@ -110,5 +115,3 @@
 
 </body>
 </html>
-
-

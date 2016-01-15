@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.example.service.UserService;
+import com.example.service.ContentService;
 import javax.inject.Inject;
 
 /**
@@ -12,19 +12,19 @@ import javax.inject.Inject;
  */
 
 @Controller
-public class UserListController {
+public class PageController {
 
-    private final UserService userService;
+    private final ContentService contentService;
 
     @Inject
-    public UserListController(final UserService userService){
-        this.userService = userService;
+    public PageController(final ContentService contentService){
+        this.contentService = contentService;
     }
 
     @RequestMapping("/")
     public ModelAndView getListUsersView(){
         ModelMap model = new ModelMap();
-        model.addAttribute("contents",userService.getList());
+        model.addAttribute("contents", contentService.getList());
         return new ModelAndView("index",model);
     }
 

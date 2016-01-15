@@ -1,14 +1,10 @@
 package com.example.repo;
 
-import com.example.model.Content;
+import com.example.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 /**
- * Created by Janusz on 2016-01-08.
+ * Created by Bany on 2016-01-12.
  */
-public interface UserRepository extends JpaRepository<Content, Integer> {
-
-
+public interface UserRepository extends JpaRepository<User, String> {
 }

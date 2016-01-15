@@ -1,11 +1,10 @@
 package com.example.service;
 
-import com.example.model.Content;
-import org.hibernate.validator.valuehandling.UnwrapValidatedValue;
-import org.slf4j.*;
+import com.example.model.User;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.validation.annotation.Validated;
 import com.example.repo.UserRepository;
 import com.example.service.exception.UserAlreadyExistsException;
 
@@ -15,39 +14,34 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * Created by Janusz on 2016-01-08.
+ * Created by Bany on 2016-01-12.
  */
 @Service
-
+@Validated
 public class UserServiceImpl implements UserService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final UserRepository repository;
+    private final UserRepository repositoryUser;
 
     @Inject
-    public UserServiceImpl(final UserRepository repository) {
-        this.repository = repository;
+    public UserServiceImpl(final UserRepository repositoryUser) {
+        this.repositoryUser = repositoryUser;
     }
 
     @Override
     @Transactional
-    public Content save(@NotNull @Valid final Content content) {
-        LOGGER.debug("Creating {}", content);
-        /*
-        Content existing = repository.findOne(content.getId());
+    public User save(@NotNull @Valid final User user) {
+        User existing = repositoryUser.findOne(user.getUsername());
         if (existing != null) {
-            throw new UserAlreadyExistsException(
-                    String.format("There already exists a content with id=%s", content.getId()));
+            user.setError("Username already exists");
+            throw new UserAlreadyExistsException(String.format("There already exists a user with username = %s", user.getUsername()));
         }
-        */
-        return repository.save(content);
+        return repositoryUser.save(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Content> getList() {
-        LOGGER.debug("Retrieving the list of all users");
-        return repository.findAll();
+    public List<User> getList() {
+        return repositoryUser.findAll();
     }
 
 }
